@@ -24,7 +24,14 @@ export default class Tgrok extends events.EventEmitter {
     Log.debug = v
   }
 
+  /**
+   * Deprecated, use `start` in favor.
+   */
   public startLocal = (lport?: number | string, domain?: string) => {
+    this.start(lport, domain)
+  }
+
+  public start = (lport?: number | string | Tunnel[], domain?: string) => {
     // no repeated start
     if (this.started) {
       Log.error("\n\tAlready Started!!!\n")
@@ -32,25 +39,27 @@ export default class Tgrok extends events.EventEmitter {
     }
     this.started = true
 
-    let localPort = 80
-    let subdomain = domain
-    if (typeof lport === "number") {
-      localPort = lport
+    let tunnels: Tunnel[] = []
+    if (typeof lport === "object") {
+      tunnels = lport as Tunnel[]
     } else {
-      subdomain = lport
+      let localPort = 80
+      let subdomain = domain
+      if (typeof lport === "number") {
+        localPort = lport
+      } else {
+        subdomain = lport as string
+      }
+      tunnels.push(new Tunnel({
+        protocol: "http",
+        hostname: "",
+        subdomain,
+        rport: 0,
+        lhost: "127.0.0.1",
+        lport: localPort,
+      }))
     }
-    const tunnel = new Tunnel({
-      protocol: "http",
-      hostname: "",
-      subdomain,
-      rport: 0,
-      lhost: "127.0.0.1",
-      lport: localPort,
-    })
-    this.start([tunnel])
-  }
 
-  public start = (tunnels: Tunnel[]) => {
     const client = new ControlClient(this.config, tunnels)
     client.on("connect", this.onConnect)
     client.on("error", this.onError)

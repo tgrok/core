@@ -27,16 +27,16 @@ tgrok.context = {
 tgrok.host = "t.iganxi.net"
 
 // start tgrok on a random subdomain with default port 80
-tgrok.startLocal()
+tgrok.start()
 
 // or spcified local port
-// tgrok.startLocal(8080)
+// tgrok.start(8080)
 
 // or spcified subdomain
-// tgrok.startLocal("test")
+// tgrok.start("test")
 
 // or spcified both
-// tgrok.startLocal(8080, "test")
+// tgrok.start(8080, "test")
 ```
 
 ## Development

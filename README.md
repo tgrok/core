@@ -23,8 +23,8 @@ tgrok.context = {
 // show debug info
 // tgrok.debug = true
 
-// set your own host
-// tgrok.host = "t.example.com"
+// set your ngrok server
+tgrok.host = "t.iganxi.net"
 
 // start tgrok on a random subdomain with default port 80
 tgrok.startLocal()
@@ -52,14 +52,10 @@ $ npm run dev
 
 # build
 $ npm run build
-
-# start the client
-$ npm run start
 ```
 
 ## Todo
 
-- [ ] npm cli: npm install -g tgrok
 - [ ] add tests
 - [ ] tcp support
 - [ ] https support

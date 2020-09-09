@@ -24,7 +24,7 @@ export default class Tgrok extends events.EventEmitter {
     Log.debug = v
   }
 
-  public startLocal = (lport?: number | string, subdomain?: string) => {
+  public startLocal = (lport?: number | string, domain?: string) => {
     // no repeated start
     if (this.started) {
       Log.error("\n\tAlready Started!!!\n")
@@ -33,8 +33,11 @@ export default class Tgrok extends events.EventEmitter {
     this.started = true
 
     let localPort = 80
-    if (subdomain) {
-      localPort = lport as number
+    let subdomain = domain
+    if (typeof lport === "number") {
+      localPort = lport
+    } else {
+      subdomain = lport
     }
     const tunnel = new Tunnel({
       protocol: "http",

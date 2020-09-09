@@ -3,7 +3,7 @@ const {Tgrok} = require('./lib/index.js')
 const tgrok = new Tgrok()
 
 // show debug info
-// tgrok.debug = true
+tgrok.debug = true
 
 tgrok.context = {
   family: 4, // you can speed up your local network connection
@@ -21,7 +21,7 @@ tgrok.host = "t.iganxi.net"
 tgrok.startLocal()
 
 // or specify local port
-// tgrok.startLocal(8080)
+// tgrok.startLocal(8000)
 
 // or specify subdomain
 // tgrok.startLocal("test")

@@ -1,0 +1,40 @@
+{
+  "name": "tgrok",
+  "version": "1.0.0",
+  "description": "tgrok: a ngrok client by typescript",
+  "keywords": [
+    "tgrok",
+    "ngrok",
+    "tunnel",
+    "typescript"
+  ],
+  "main": "./lib/index.js",
+  "types": "tgrok.d.ts",
+  "homepage": "https://github.com/tgrok/tgrok/#readme",
+  "scripts": {
+    "build": "rm -f lib/* && tsc",
+    "dev": "tsc && node ./index.js",
+    "lint": "tslint -c tslint.json -p tsconfig.json",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "directories": {
+    "lib": "./lib"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tgrok/tgrok.git"
+  },
+  "author": "yueyuzhao",
+  "license": "ISC",
+  "dependencies": {
+    "dayjs": "^1.8.35",
+    "lodash": "^4.17.20",
+    "randomatic": "^3.1.1"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.160",
+    "@types/node": "^14.6.4",
+    "tslint": "^6.1.3",
+    "typescript": "~3.9.3"
+  }
+}

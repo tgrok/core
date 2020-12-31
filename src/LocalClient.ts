@@ -21,7 +21,12 @@ class LocalClient extends Client {
 
   public start = () => {
     this.info("connecting")
-    this.socket = net.connect(this.tunnel.localPort, this.tunnel.localHost, this.onConnect)
+    try {
+      this.socket = net.connect(this.tunnel.localPort, this.tunnel.localHost, this.onConnect)
+    } catch (e) {
+      // tslint:disable-next-line:no-console
+      console.log(e)
+    }
     this.socket.on("data", this.onData)
     this.socket.on("end", this.onEnd)
     this.socket.on("error", this.onError)

@@ -39,8 +39,10 @@ class Client extends events.EventEmitter {
   }
 
   protected onError = (err: Error) => {
-    this.emit("error", err)
-    this.info(err.message)
+    this.info('error')
+    // tslint:disable-next-line:no-console
+    console.log(err)
+    // this.emit("error", err)
   }
 }
 

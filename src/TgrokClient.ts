@@ -28,7 +28,14 @@ class TgrokClient extends Client {
     if (this.port == null) {
       return
     }
-    this.socket = tls.connect(this.port, this.host, this.context, this.onConnect)
+    try {
+      this.socket = tls.connect(this.port, this.host, this.context, this.onConnect)
+    } catch (e) {
+      this.info('Error: ' + e.toString())
+      this.info("connect failed, retry after 500s")
+      setTimeout(this.connect, 500)
+      return
+    }
     this.socket.on("data", this.onData)
     this.socket.on("end", this.onEnd)
     this.socket.on("error", this.onError)
@@ -44,6 +51,9 @@ class TgrokClient extends Client {
     const headBuffer = Buffer.alloc(8)
     headBuffer.writeUInt32LE(Buffer.byteLength(data), 0)
     this.socket.write(headBuffer)
+    // this.info(headBuffer.toString())
+    // tslint:disable-next-line:no-console
+    // console.log(Buffer.byteLength(data))
     this.info(`send >>>> ${data}`)
     this.socket.write(data)
   }
